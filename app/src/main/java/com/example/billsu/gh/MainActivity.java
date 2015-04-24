@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -32,6 +33,7 @@ public class MainActivity extends Activity {
     ArrayList<Rect> obstacles;
     ArrayList<Ghost> ghosts = new ArrayList<Ghost>();
     RelativeLayout layout;
+    MediaPlayer backgroundMusic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,8 @@ public class MainActivity extends Activity {
 
         // Log.i("image starts at", " " + Scared_Person.getX()+" "+ Scared_Person.getY());
 
+        backgroundMusic = MediaPlayer.create(MainActivity.this, R.raw.background);
+        backgroundMusic.start();
 
         Radial = (ImageView) findViewById(R.id.lanternradial);
         Radial.setX(Scared_Person.getX() + 70);
@@ -123,7 +127,10 @@ public class MainActivity extends Activity {
         });
     } */
 
-
+  public void onPause() {
+        super.onPause();
+        backgroundMusic.pause();
+    }
 
   public boolean onTouchEvent(MotionEvent event){
       try {
